@@ -5,9 +5,9 @@ const Reading = mongoose.model(
     new mongoose.Schema({
         entryId: [{type: mongoose.Schema.Types.ObjectId, ref: 'Entry'}],
         date: Date,
-        past: [{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}],
-        present: [{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}],
-        future:[{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}]
+        firstCard: [{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}],
+        secondCard: [{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}],
+        thirdCard:[{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}]
     })
 )
 
