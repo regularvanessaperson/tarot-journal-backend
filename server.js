@@ -47,7 +47,9 @@ app.get('/', (req, res)=> {
 //import routes we wrote
 require('./routes/auth.routes')(app)
 require('./routes/user.routes')(app)
-
+// require('/routes/entry.routes')(app)
+// require('/routes/reading.routes')(app)
+// require('/routes/cards.routes')(app)
 
 //set prot, listen for request
 const PORT = process.env.PORT || 8080

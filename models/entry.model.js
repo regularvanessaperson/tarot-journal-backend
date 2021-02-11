@@ -7,7 +7,7 @@ const Entry = mongoose.model(
         date: Date,
         body: String,
         reading: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reading'}],
-        favorites: Boolean
+        favorite: Boolean
     })
 )
 
