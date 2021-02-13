@@ -20,7 +20,7 @@ module.exports = function(app) {
 
 
     //Edit any entry
-    // app.put("/api/entry/edit", controller.editEntry)
+    app.put("/api/entry/edit", controller.editEntry)
 
     //Delete any entry
     // app.delete("/api/entry/delete", controller.adminBoard)
