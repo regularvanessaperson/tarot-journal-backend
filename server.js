@@ -15,7 +15,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 //parse request of content type = application / x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: false}))
 
 
 //SETUP MONGOOSE
@@ -47,8 +47,8 @@ app.get('/', (req, res)=> {
 //import routes we wrote
 require('./routes/auth.routes')(app)
 require('./routes/user.routes')(app)
-// require('./routes/card.routes')(app)
-// require('./routes/entry.routes')(app)
+require('./routes/card.routes')(app)
+require('./routes/entry.routes')(app)
 require('./routes/reading.routes')(app)
 
 
