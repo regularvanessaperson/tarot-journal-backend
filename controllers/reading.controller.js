@@ -1,5 +1,6 @@
 const db = require('../models/index')
 const axios = require('axios')
+const Entry = require('../models/entry.model')
 //Access to our db thorugh User and Role variable
 const User = db.user
 const Card = db.card
@@ -45,14 +46,28 @@ exports.generateReading = (req, res) => {
         reading.firstCard = cards[0]
         reading.secondCard = cards[1]
         reading.thirdCard = cards[2]
-        reading.save((err) => {
-            console.log(err)
+        //save reading
+        reading.save(err => {
+            if (err) {
+                res.status(500).send({ message: err })
+                return
+            }
+            res.send(reading)
         })
 
-        res.send(reading)
+        //save the reading id in the readingId field for each entry
+        Entry.findById(req.body.entryId, (err, entry) => {
+            if (err) {
+                console.log(err)
+            }
+            entry.readingId.push(reading._id)
+            entry.save()
+        })
+
+
     }).catch(error => {
         console.log("error", error)
     })
 
-    
+
 }

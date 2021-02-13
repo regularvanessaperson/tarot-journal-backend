@@ -20,6 +20,16 @@ exports.makeEntry = (req, res) => {
     //reading will be on same page as entry get the entryId from body and push into reading field
     entry.readingId.push(req.body.readingId)
 
+    //save entry in user model
+    User.findById(req.body.creator, (err, user) => {
+        if (err) {
+            console.log(err)
+        }
+        user.entries.push(entry._id)
+        user.save()
+    })
+
+    //save entry
     entry.save(err => {
         if (err) {
             res.status(500).send({ message: err })
@@ -59,3 +69,5 @@ exports.getEntry = (req, res) => {
             else res.send(entry)
         })
 }
+
+
