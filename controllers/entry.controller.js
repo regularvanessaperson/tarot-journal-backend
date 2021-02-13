@@ -70,4 +70,13 @@ exports.getEntry = (req, res) => {
         })
 }
 
+exports.editEntry = (req,res)=> {
+    Entry.updateOne({_id: req.body._id}, {
+        body: req.body.body
+    }).then((updatedEntry) => {
+        if (!updatedEntry)
+        return res.status(400).send({ message: "Cannot edit this post" })
+        else res.send(updatedEntry)
+    })
+}
 
