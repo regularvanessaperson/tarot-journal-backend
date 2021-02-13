@@ -1,4 +1,4 @@
-const controller = require('../controllers/user.controller')
+const controller = require('../controllers/entry.controller')
 
 module.exports = function(app) {
     
@@ -11,18 +11,18 @@ module.exports = function(app) {
         next();
     })
     //Get all entrys for feed
-    app.get("/api/entry/feed", controller.feed)
+    // app.get("/api/entry/feed", controller.feed)
    
     //Post a new entry
     app.post("/api/entry/make", controller.makeEntry)
 
     //Edit any entry
-    app.put("/api/entry/edit", controller.editEntry)
+    // app.put("/api/entry/edit", controller.editEntry)
 
     //Delete any entry
-    app.delete("/api/entry/delete", controller.adminBoard)
+    // app.delete("/api/entry/delete", controller.adminBoard)
 
     //Change favorite status to True or False
-    app.put("/api/entry/favorite", controller.favorite)
+    // app.put("/api/entry/favorite", controller.favorite)
 
 }

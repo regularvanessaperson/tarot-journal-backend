@@ -18,9 +18,10 @@ module.exports = function(app) {
 
     app.get("/api/test/admin", [authJwt.verifyWebToken, authJwt.isAdmin], controller.adminBoard)
 
-    app.get("/api/user/profile/:id", controller.userProfile)
+    //display user profile (not sure if I need this if I have the get userBoard above)
+    // app.get("/api/user/profile/:id", controller.userProfile)
 
     //Get array of favorite posts (debatable if I need this field on the user should I just filter the if favorite = ture on the frontend to display)
-    app.get("/api/user/favorites", controller.favorites)
+    // app.get("/api/user/favorites", controller.favorites)
 
 }

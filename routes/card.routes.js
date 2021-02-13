@@ -1,5 +1,4 @@
-const {authJwt} = require('../middlewares')
-const controller = require('../controllers/user.controller')
+// const controller = require('../controllers/card.controller')
 
 module.exports = function(app) {
     
@@ -13,6 +12,6 @@ module.exports = function(app) {
     })
     
     //generates three cards per API call and fill in the fields for each one
-    app.get("/api/cards/generate", controller.generateCards)
+    // app.get("/api/card/generate", controller.generateCards)
 
 }

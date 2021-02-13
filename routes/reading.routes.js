@@ -1,5 +1,4 @@
-const {authJwt} = require('../middlewares')
-const controller = require('../controllers/user.controller')
+const controller = require('../controllers/reading.controller')
 
 module.exports = function(app) {
     
@@ -13,5 +12,5 @@ module.exports = function(app) {
     })
     
     //The cards should populate the first second and third card fields 
-    app.get("/api/reading/daily", controller.getReading)
+    app.get("/api/reading/generate", controller.generateReading)
 }
