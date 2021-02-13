@@ -12,5 +12,5 @@ module.exports = function(app) {
     })
     
     //The cards should populate the first second and third card fields 
-    app.get("/api/reading/generate", controller.generateReading)
+    app.post("/api/reading/generate", controller.generateReading)
 }

@@ -3,12 +3,13 @@ const mongoose = require('mongoose')
 const Entry = mongoose.model(
     "Entry",
     new mongoose.Schema({
-        creator: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+        creator: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         date: Date,
         body: String,
-        reading: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reading'}],
+        readingId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reading' }],
         favorite: Boolean
     })
+
 )
 
 module.exports = Entry;

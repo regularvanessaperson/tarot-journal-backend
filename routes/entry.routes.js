@@ -10,11 +10,14 @@ module.exports = function(app) {
         );
         next();
     })
-    //Get all entrys for feed
-    // app.get("/api/entry/feed", controller.feed)
+
    
     //Post a new entry
     app.post("/api/entry/make", controller.makeEntry)
+
+    //Get a specifict entry
+    app.get("/api/entry/:idx", controller.getEntry)
+
 
     //Edit any entry
     // app.put("/api/entry/edit", controller.editEntry)
