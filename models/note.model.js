@@ -5,7 +5,7 @@ const Note = mongoose.model(
     new mongoose.Schema({
         creator: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         date: Date,
-        body: String,
+        body: String
     })
 
 )

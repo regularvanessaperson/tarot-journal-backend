@@ -9,6 +9,7 @@ db.role = require('./role.model')
 db.entry = require('./entry.model')
 db.reading = require('./reading.model')
 db.card = require('./card.model')
+db.note = require('./note.model')
 
 db.Roles = ['users', 'admin']
 
