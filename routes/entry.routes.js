@@ -23,7 +23,7 @@ module.exports = function(app) {
     app.put("/api/entry/edit", controller.editEntry)
 
     //Delete any entry
-    // app.delete("/api/entry/delete", controller.adminBoard)
+    app.delete("/api/entry/delete", controller.deleteEntry)
 
     //Change favorite status to True or False
     // app.put("/api/entry/favorite", controller.favorite)
