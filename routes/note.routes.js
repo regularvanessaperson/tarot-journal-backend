@@ -1,4 +1,4 @@
-const controller = require('../controllers/entry.controller')
+const controller = require('../controllers/note.controller')
 
 module.exports = function(app) {
     
@@ -12,10 +12,10 @@ module.exports = function(app) {
     })
 
    
-    //Post a new entry
+    //Post a new note
     app.post("/api/entry/make", controller.makeEntry)
 
-    //Get a specifict entry
+    //Get month of notes
     app.get("/api/entry/:idx", controller.getEntry)
 
 
@@ -25,7 +25,5 @@ module.exports = function(app) {
     //Delete any entry
     // app.delete("/api/entry/delete", controller.deleteEntry)
 
-    //Change favorite status to True or False
-    // app.put("/api/entry/favorite", controller.favorite)
 
 }

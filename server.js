@@ -50,6 +50,7 @@ require('./routes/user.routes')(app)
 require('./routes/card.routes')(app)
 require('./routes/entry.routes')(app)
 require('./routes/reading.routes')(app)
+require('./routes/note.routes')(app)
 
 
 //set prot, listen for request
