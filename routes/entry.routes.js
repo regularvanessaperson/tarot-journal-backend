@@ -24,6 +24,6 @@ module.exports = function(app) {
 
 
     //Change favorite status to True or False
-    // app.put("/api/entry/favorite", controller.favorite)
+    app.put("/api/entry/favorite", controller.favorite)
 
 }

@@ -1,5 +1,6 @@
 const db = require('../models/index')
 const { populate } = require('../models/entry.model')
+const { user } = require('../models/index')
 //Access to our db 
 const User = db.user
 const Reading = db.reading
@@ -60,8 +61,8 @@ exports.getEntry = (req, res) => {
             }
         })
         .populate({
-             path: 'creator',
-                model: 'User'
+            path: 'creator',
+            model: 'User'
         })
         .then((entry) => {
             if (!entry)
@@ -71,14 +72,38 @@ exports.getEntry = (req, res) => {
 }
 
 //edit entry
-exports.editEntry = (req,res)=> {
+exports.editEntry = (req, res) => {
     const id = req.body._id
-    Entry.updateOne({_id: id}, {
+    Entry.updateOne({ _id: id }, {
         body: req.body.body
     }).then((updatedEntry) => {
         if (!updatedEntry)
-        return res.status(400).send({ message: "Cannot edit this entry" })
+            return res.status(400).send({ message: "Cannot edit this entry" })
         else res.send(updatedEntry)
     })
 }
 
+exports.favorite = (req, res) => {
+    const id = req.body._id
+    Entry.findById(id, (err, entry) => {
+        if (entry.favorite === false) {
+            entry.favorite = true
+            entry.save()
+            User.findByIdAndUpdate(entry.creator, (err, creator) =>{
+                creator.favorites.push(entry._id)
+                creator.save()
+            })
+        } else {
+            entry.favorite = false
+            entry.save()
+            User.findByIdAndUpdate(entry.creator, (err, creator) =>{
+                creator.favorites.pull(entry._id)
+                creator.save()
+            })
+        }
+    }).then((entry) => {
+        if (!entry)
+            return res.status(400).send({ message: "Cannot find this entry" })
+        else res.send(entry)
+    })
+}
