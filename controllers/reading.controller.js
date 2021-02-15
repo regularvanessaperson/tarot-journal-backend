@@ -1,10 +1,11 @@
 const db = require('../models/index')
 const axios = require('axios')
-const Entry = require('../models/entry.model')
+// const Entry = require('../models/entry.model')
 //Access to our db thorugh User and Role variable
 const User = db.user
 const Card = db.card
 const Reading = db.reading
+const Entry = db.entry
 
 //save the three cards that were generated from the API and save the three entrys 
 exports.generateReading = (req, res) => {
@@ -69,5 +70,31 @@ exports.generateReading = (req, res) => {
         console.log("error", error)
     })
 
+}
 
+//get the reading requires the entryId and
+exports.getReading = (req, res) => {
+    const id = req.params.idx
+    Reading.findOne({ _id: id })
+        .populate({
+            path: 'firstCard',
+            model: 'Card'
+        })
+        .populate({
+            path: 'secondCard',
+            model: 'Card'
+            })
+        .populate({
+            path: 'thirdCard',
+            model: 'Card'
+            })
+        .populate({
+            path: 'entryId',
+            model: 'Entry'
+            })
+    .then((data) => {
+    if (!data)
+        return res.status(400).send({ message: "Cannot find this reading" })
+    else res.send(data)
+})
 }

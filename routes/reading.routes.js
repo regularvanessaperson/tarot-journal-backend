@@ -12,5 +12,8 @@ module.exports = function(app) {
     })
     
     //The cards should populate the first second and third card fields 
-    app.post("/api/reading/generate", controller.generateReading)
+    app.post("/api/reading", controller.generateReading)
+
+    //Get the reading associated with readingId
+    app.get("/api/reading/:idx", controller.getReading)
 }

@@ -65,18 +65,30 @@ exports.getEntry = (req, res) => {
         })
         .then((entry) => {
             if (!entry)
-                return res.status(400).send({ message: "Cannot find this post" })
+                return res.status(400).send({ message: "Cannot find this entry" })
             else res.send(entry)
         })
 }
 
+//edit entry
 exports.editEntry = (req,res)=> {
-    Entry.updateOne({_id: req.body._id}, {
+    const id = req.body._id
+    Entry.updateOne({_id: id}, {
         body: req.body.body
     }).then((updatedEntry) => {
         if (!updatedEntry)
-        return res.status(400).send({ message: "Cannot edit this post" })
+        return res.status(400).send({ message: "Cannot edit this entry" })
         else res.send(updatedEntry)
     })
 }
 
+//delete entry 
+exports.deleteEntry = (req, res) => {
+    const id = req.body._id
+    Entry.deleteOne({ _id: id })
+        .then((data) => {
+            if (!data)
+                return res.status(400).send({ message: "Unable to delete entry" })
+            else res.send(data)
+        })
+}
