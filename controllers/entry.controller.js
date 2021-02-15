@@ -82,13 +82,3 @@ exports.editEntry = (req,res)=> {
     })
 }
 
-//delete entry 
-exports.deleteEntry = (req, res) => {
-    const id = req.body._id
-    Entry.deleteOne({ _id: id })
-        .then((data) => {
-            if (!data)
-                return res.status(400).send({ message: "Unable to delete entry" })
-            else res.send(data)
-        })
-}

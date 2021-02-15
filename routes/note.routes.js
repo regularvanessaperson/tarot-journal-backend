@@ -13,17 +13,17 @@ module.exports = function(app) {
 
    
     //Post a new note
-    app.post("/api/entry/make", controller.makeEntry)
+    app.post("/api/note", controller.makeNote)
 
     //Get month of notes
-    app.get("/api/entry/:idx", controller.getEntry)
+    // app.get("/api/note/month", controller.getEntry)
 
 
     //Edit any entry
-    app.put("/api/entry/edit", controller.editEntry)
+    app.put("/api/note/edit", controller.editNote)
 
     //Delete any entry
-    // app.delete("/api/entry/delete", controller.deleteEntry)
+    app.delete("/api/note/delete", controller.deleteNote)
 
 
 }
