@@ -18,8 +18,6 @@ exports.makeEntry = (req, res) => {
     //Reference the user as the creator of the new post
     entry.creator.push(req.body.creator)
 
-    //reading will be on same page as entry get the entryId from body and push into reading field
-    entry.readingId.push(req.body.readingId)
 
     //save entry in user model
     User.findById(req.body.creator, (err, user) => {
@@ -29,7 +27,9 @@ exports.makeEntry = (req, res) => {
         user.entries.push(entry._id)
         user.save()
     })
-
+    
+    //reading will be on same page as entry get the entryId from body and push into reading field
+    entry.readingId = (req.body.readingId)
     //save entry
     entry.save(err => {
         if (err) {
@@ -89,14 +89,14 @@ exports.favorite = (req, res) => {
         if (entry.favorite === false) {
             entry.favorite = true
             entry.save()
-            User.findByIdAndUpdate(entry.creator, (err, creator) =>{
+            User.findByIdAndUpdate(entry.creator, (err, creator) => {
                 creator.favorites.push(entry._id)
                 creator.save()
             })
         } else {
             entry.favorite = false
             entry.save()
-            User.findByIdAndUpdate(entry.creator, (err, creator) =>{
+            User.findByIdAndUpdate(entry.creator, (err, creator) => {
                 creator.favorites.pull(entry._id)
                 creator.save()
             })
