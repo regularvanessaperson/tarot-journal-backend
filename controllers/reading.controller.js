@@ -14,7 +14,7 @@ exports.generateReading = (req, res) => {
         date: new Date()
     })
     //reading will be on same page as entry get the entryId from body and push into reading field
-    reading.entryId.push(req.body.entryId)
+    reading.entryId = req.body.entryId
 
     //initialize empty array since axios call pulls 3 random cards per call
     const cards = []
@@ -61,7 +61,7 @@ exports.generateReading = (req, res) => {
             if (err) {
                 console.log(err)
             }
-            entry.readingId.push(reading._id)
+            entry.readingId =reading._id
             entry.save()
         })
 

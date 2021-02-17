@@ -6,7 +6,7 @@ const Entry = mongoose.model(
         creator: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         date: Date,
         body: String,
-        readingId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reading' }],
+        readingId: { type: mongoose.Schema.Types.ObjectId, ref: 'Reading' },
         favorite: Boolean
     })
 
