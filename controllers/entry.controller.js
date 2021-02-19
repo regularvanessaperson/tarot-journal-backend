@@ -107,3 +107,72 @@ exports.favorite = (req, res) => {
         else res.send(entry)
     })
 }
+
+
+exports.getEntryByDate = (req,res) => {
+    const entryDate = new Date(req.params.date)
+    const creator = req.params.creator
+    const nextDay = new Date(req.params.date)
+    nextDay.setDate(entryDate.getDate() +1)
+    Entry.findOne({ date: {$lt: nextDay, $gte: entryDate}, creator: creator})
+    .populate({
+        path: 'reading',
+        model: 'Entry',
+        populate: {
+            path: 'firstCard',
+            model: 'Card',
+        },
+        populate: {
+            path: 'secondCard',
+            model: 'Card',
+        },
+        populate: {
+            path: 'thirdCard',
+            model: 'Card',
+        }
+    })
+    .populate({
+        path: 'creator',
+        model: 'User'
+    })
+    .then((entry) => {
+        if (!entry)
+            return res.status(400).send({ message: "Cannot find this entry" })
+        else res.send(entry)
+    })
+}
+
+exports.getEntryByMonth = (req,res) => {
+    const entryDate = new Date(req.params.date)
+    entryDate.setDate(1)
+    const creator = req.params.creator
+    const nextMonth = new Date(req.params.date)
+    nextMonth.setMonth(entryDate.getMonth() +1)
+    nextMonth.setDate(1)
+    Entry.find({ date: {$lt: nextMonth, $gte: entryDate}, creator: creator})
+    .populate({
+        path: 'reading',
+        model: 'Entry',
+        populate: {
+            path: 'firstCard',
+            model: 'Card',
+        },
+        populate: {
+            path: 'secondCard',
+            model: 'Card',
+        },
+        populate: {
+            path: 'thirdCard',
+            model: 'Card',
+        }
+    })
+    .populate({
+        path: 'creator',
+        model: 'User'
+    })
+    .then((entry) => {
+        if (!entry)
+            return res.status(400).send({ message: "Cannot find this entry" })
+        else res.send(entry)
+    })
+}
