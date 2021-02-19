@@ -116,20 +116,20 @@ exports.getEntryByDate = (req,res) => {
     nextDay.setDate(entryDate.getDate() +1)
     Entry.findOne({ date: {$lt: nextDay, $gte: entryDate}, creator: creator})
     .populate({
-        path: 'reading',
-        model: 'Entry',
+        path: 'readingId',
+        model: 'Reading',
         populate: {
-            path: 'firstCard',
-            model: 'Card',
-        },
-        populate: {
-            path: 'secondCard',
-            model: 'Card',
-        },
-        populate: {
-            path: 'thirdCard',
+            path: 'firstCard secondCard thirdCard',
             model: 'Card',
         }
+        // populate: {
+        //     path: 'secondCard',
+        //     model: 'Card',
+        // },
+        // populate: {
+        //     path: 'thirdCard',
+        //     model: 'Card',
+        // }
     })
     .populate({
         path: 'creator',
