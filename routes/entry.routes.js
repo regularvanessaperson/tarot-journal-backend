@@ -17,11 +17,15 @@ module.exports = function(app) {
 
     //Get a specifict entry
     app.get("/api/entry/:idx", controller.getEntry)
+    
+    //get entry on a specific day
+    app.get("/api/entry/date/:date/creator/:creator", controller.getEntryByDate)
 
+    //get entry on a specific month
+    app.get("/api/entry/month/:date/creator/:creator", controller.getEntryByMonth)
 
     //Edit any entry
     app.put("/api/entry/edit", controller.editEntry)
-
 
     //Change favorite status to True or False
     app.put("/api/entry/favorite", controller.favorite)
