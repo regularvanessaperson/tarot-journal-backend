@@ -2,7 +2,7 @@
 This repo is the backend for Tarot Journal a personal journal app where the user can generate a tarot reading per entry.
 
 # Link to Frontend Repo
-The frontend of our app can be found [here](https://github.com/regularvanessaperson/frontend-next-tarot)
+The frontend of my app can be found [here](https://github.com/regularvanessaperson/frontend-next-tarot)
 
 
 # Installation Instructions
@@ -20,8 +20,8 @@ The frontend of our app can be found [here](https://github.com/regularvanessaper
 - Express: allows us to write routes that send/retrieve information from our database
 
 ## Database
-- MongoDB: we used a non-relational database for our app because it provided us with more flexibility than a SQL database
-- Mongoose: allows our backend to communicate with our Mongo database
+- MongoDB: used a non-relational database for the app because it provided us with more flexibility than a SQL database and it was easier to adjust as needed
+- Mongoose: allows backend to communicate with our Mongo database
 
 # Routes
 Methods | URLs | Actions
