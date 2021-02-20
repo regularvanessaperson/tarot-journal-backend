@@ -165,7 +165,7 @@ exports.getEntryByMonth = (req, res) => {
 exports.deleteEntry = (req, res) => {
     const id = req.body._id
     console.log("this is the id", id)
-    Entry.findById(id,(err, foundEntry)=>{
+    Entry.findById(id, (err, foundEntry) => {
         console.log("found this entry", foundEntry)
         User.findByIdAndUpdate(foundEntry.creator, (err, creator) => {
             creator.favorites.pull(foundEntry._id)

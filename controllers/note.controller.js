@@ -24,9 +24,9 @@ exports.makeNote = (req, res) => {
 }
 
 //edit note
-exports.editNote = (req,res)=> {
+exports.editNote = (req, res) => {
     const id = req.body._id
-    Note.updateOne({_id: id}, {
+    Note.updateOne({ _id: id }, {
         body: req.body.body
     }).then((updatedNote) => {
         if (!updatedNote)
@@ -44,6 +44,6 @@ exports.deleteNote = (req, res) => {
                 return res.status(400).send({ message: "Unable to delete note" })
             else res.send("Note successfully deleted")
         })
-    
-        
+
+
 }

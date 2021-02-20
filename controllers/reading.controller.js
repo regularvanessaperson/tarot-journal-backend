@@ -61,7 +61,7 @@ exports.generateReading = (req, res) => {
             if (err) {
                 console.log(err)
             }
-            entry.readingId =reading._id
+            entry.readingId = reading._id
             entry.save()
         })
 
@@ -134,7 +134,7 @@ exports.generateFiveReading = (req, res) => {
             if (err) {
                 console.log(err)
             }
-            entry.readingId =reading._id
+            entry.readingId = reading._id
             entry.save()
         })
 
@@ -156,18 +156,18 @@ exports.getReading = (req, res) => {
         .populate({
             path: 'secondCard',
             model: 'Card'
-            })
+        })
         .populate({
             path: 'thirdCard',
             model: 'Card'
-            })
+        })
         .populate({
             path: 'entryId',
             model: 'Entry'
-            })
-    .then((data) => {
-    if (!data)
-        return res.status(400).send({ message: "Cannot find this reading" })
-    else res.send(data)
-})
+        })
+        .then((data) => {
+            if (!data)
+                return res.status(400).send({ message: "Cannot find this reading" })
+            else res.send(data)
+        })
 }

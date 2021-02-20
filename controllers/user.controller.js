@@ -1,6 +1,6 @@
 const User = require("../models/user.model")
 
-exports.allAccess = (req, res)=>{
+exports.allAccess = (req, res) => {
     res.status(200).send("public content")
 }
 
@@ -12,39 +12,39 @@ exports.adminBoard = (req, res) => {
     res.status(200).send("Admin content")
 }
 
-exports.userProfile = (req,res) => {
+exports.userProfile = (req, res) => {
     User.findById(req.params.idx).
-    populate('favorites').
-    exec((err, user) => {
-        if(err){
-            res.status(400).send({message: "User profile not found"})
-        } else {
-            res.send(user)
-        }
-    })
+        populate('favorites').
+        exec((err, user) => {
+            if (err) {
+                res.status(400).send({ message: "User profile not found" })
+            } else {
+                res.send(user)
+            }
+        })
 }
 
-exports.feed = (req,res) =>{
+exports.feed = (req, res) => {
     User.findById(req.params.idx)
-    .populate({
-        path: 'entries',
-        model: 'Entry',
-        populate: {
-            path: 'readingId',
-            model: 'Reading',
+        .populate({
+            path: 'entries',
+            model: 'Entry',
             populate: {
-                path: 'firstCard secondCard thirdCard',
-                model: 'Card'
+                path: 'readingId',
+                model: 'Reading',
+                populate: {
+                    path: 'firstCard secondCard thirdCard',
+                    model: 'Card'
+                }
             }
-        }
-    })
-    .exec((err, user) => {
-        if(err){
-            res.status(400).send({message: "User feed not found"})
-        } else {
-            res.send(user)
-        }
-    })
+        })
+        .exec((err, user) => {
+            if (err) {
+                res.status(400).send({ message: "User feed not found" })
+            } else {
+                res.send(user)
+            }
+        })
 }
 
 

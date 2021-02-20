@@ -10,8 +10,6 @@ module.exports = function(app) {
         );
         next();
     })
-    
-    //generates three cards per API call and fill in the fields for each one
-    // app.get("/api/card/generate", controller.generateCards)
+    //no card routes
 
 }
