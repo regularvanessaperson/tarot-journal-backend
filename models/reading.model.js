@@ -7,7 +7,9 @@ const Reading = mongoose.model(
         date: Date,
         firstCard: {type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
         secondCard: {type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
-        thirdCard:{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}
+        thirdCard:{type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
+        fourthCard:{type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
+        fifthCard:{type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
     })
 )
 

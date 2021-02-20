@@ -1,8 +1,8 @@
 const controller = require('../controllers/entry.controller')
 
-module.exports = function(app) {
-    
-    app.use((req,res, next)=> {
+module.exports = function (app) {
+
+    app.use((req, res, next) => {
         //set header and allow use of x access token (we will use this to pass our token)
         res.header(
             "Access-Control-Allow-Headers",
@@ -11,13 +11,13 @@ module.exports = function(app) {
         next();
     })
 
-   
+
     //Post a new entry
     app.post("/api/entry/make", controller.makeEntry)
 
     //Get a specifict entry
     app.get("/api/entry/:idx", controller.getEntry)
-    
+
     //get entry on a specific day
     app.get("/api/entry/date/:date/creator/:creator", controller.getEntryByDate)
 
@@ -29,5 +29,8 @@ module.exports = function(app) {
 
     //Change favorite status to True or False
     app.put("/api/entry/favorite", controller.favorite)
+
+    //Delete any entry
+    app.delete("/api/entry/delete", controller.deleteEntry)
 
 }

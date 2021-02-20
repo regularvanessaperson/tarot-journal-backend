@@ -27,7 +27,7 @@ exports.makeEntry = (req, res) => {
         user.entries.push(entry._id)
         user.save()
     })
-    
+
     //reading will be on same page as entry get the entryId from body and push into reading field
     entry.readingId = (req.body.readingId)
     //save entry
@@ -44,13 +44,13 @@ exports.makeEntry = (req, res) => {
 exports.getEntry = (req, res) => {
     const id = req.params.idx
     Entry.findOne({ _id: id })
-    .populate({
-        path: 'readingId',
-        model: 'Reading',
-        populate: {
-            path: 'firstCard secondCard thirdCard',
-            model: 'Card'
-        }
+        .populate({
+            path: 'readingId',
+            model: 'Reading',
+            populate: {
+                path: 'firstCard secondCard thirdCard',
+                model: 'Card'
+            }
         })
         .populate({
             path: 'creator',
@@ -101,62 +101,82 @@ exports.favorite = (req, res) => {
 }
 
 
-exports.getEntryByDate = (req,res) => {
+exports.getEntryByDate = (req, res) => {
     const entryDate = new Date(req.params.date)
     const creator = req.params.creator
     const nextDay = new Date(req.params.date)
-    nextDay.setDate(entryDate.getDate() +1)
-    Entry.findOne({ date: {$lt: nextDay, $gte: entryDate}, creator: creator})
-    .populate({
-        path: 'readingId',
-        model: 'Reading',
-        populate: {
-            path: 'firstCard secondCard thirdCard',
-            model: 'Card'
-        }
-    })
-    .populate({
-        path: 'creator',
-        model: 'User'
-    })
-    .then((entry) => {
-        if (!entry)
-            return res.status(400).send({ message: "Cannot find this entry" })
-        else res.send(entry)
-    })
+    nextDay.setDate(entryDate.getDate() + 1)
+    Entry.findOne({ date: { $lt: nextDay, $gte: entryDate }, creator: creator })
+        .populate({
+            path: 'readingId',
+            model: 'Reading',
+            populate: {
+                path: 'firstCard secondCard thirdCard',
+                model: 'Card'
+            }
+        })
+        .populate({
+            path: 'creator',
+            model: 'User'
+        })
+        .then((entry) => {
+            if (!entry)
+                return res.status(400).send({ message: "Cannot find this entry" })
+            else res.send(entry)
+        })
 }
 
-exports.getEntryByMonth = (req,res) => {
+exports.getEntryByMonth = (req, res) => {
     const entryDate = new Date(req.params.date)
     entryDate.setDate(1)
     const creator = req.params.creator
     const nextMonth = new Date(req.params.date)
-    nextMonth.setMonth(entryDate.getMonth() +1)
+    nextMonth.setMonth(entryDate.getMonth() + 1)
     nextMonth.setDate(1)
-    Entry.find({ date: {$lt: nextMonth, $gte: entryDate}, creator: creator})
-    .populate({
-        path: 'reading',
-        model: 'Entry',
-        populate: {
-            path: 'firstCard',
-            model: 'Card',
-        },
-        populate: {
-            path: 'secondCard',
-            model: 'Card',
-        },
-        populate: {
-            path: 'thirdCard',
-            model: 'Card',
-        }
+    Entry.find({ date: { $lt: nextMonth, $gte: entryDate }, creator: creator })
+        .populate({
+            path: 'reading',
+            model: 'Entry',
+            populate: {
+                path: 'firstCard',
+                model: 'Card',
+            },
+            populate: {
+                path: 'secondCard',
+                model: 'Card',
+            },
+            populate: {
+                path: 'thirdCard',
+                model: 'Card',
+            }
+        })
+        .populate({
+            path: 'creator',
+            model: 'User'
+        })
+        .then((entry) => {
+            if (!entry)
+                return res.status(400).send({ message: "Cannot find this entry" })
+            else res.send(entry)
+        })
+}
+
+//delete note 
+exports.deleteEntry = (req, res) => {
+    const id = req.body._id
+    console.log("this is the id", id)
+    Entry.findById(id,(err, foundEntry)=>{
+        console.log("found this entry", foundEntry)
+        User.findByIdAndUpdate(foundEntry.creator, (err, creator) => {
+            creator.favorites.pull(foundEntry._id)
+            creator.save()
+        })
     })
-    .populate({
-        path: 'creator',
-        model: 'User'
-    })
-    .then((entry) => {
-        if (!entry)
-            return res.status(400).send({ message: "Cannot find this entry" })
-        else res.send(entry)
-    })
+    Entry.findByIdAndDelete({ _id: id })
+        .then((entry) => {
+            if (!entry)
+                return res.status(400).send({ message: "Unable to delete note" })
+            else res.send("Note successfully deleted")
+        })
+
 }
