@@ -25,9 +25,20 @@ exports.userProfile = (req,res) => {
 }
 
 exports.feed = (req,res) =>{
-    User.findById(req.params.idx).
-    populate('entries').
-    exec((err, user) => {
+    User.findById(req.params.idx)
+    .populate({
+        path: 'entries',
+        model: 'Entry',
+        populate: {
+            path: 'readingId',
+            model: 'Reading',
+            populate: {
+                path: 'firstCard secondCard thirdCard',
+                model: 'Card'
+            }
+        }
+    })
+    .exec((err, user) => {
         if(err){
             res.status(400).send({message: "User feed not found"})
         } else {
