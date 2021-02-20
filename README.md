@@ -10,8 +10,6 @@ The frontend of our app can be found [here](https://github.com/regularvanessaper
 - cd into local directory and `npm install` to install dependencies
 - You will need to have mongoDB installed on your computer
 
-# Approach and ERD
-The core functionality of our app involves a user making a post, so we began by defining how we wanted to associate posts and models. [Here](https://lucid.app/lucidchart/invitations/accept/8a5ee3bc-9af1-4987-b8d1-c4cc620a7719) is a link to our ERD.
 
 # Tech Stack
 ## Security and Authentication
