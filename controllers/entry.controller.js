@@ -44,21 +44,13 @@ exports.makeEntry = (req, res) => {
 exports.getEntry = (req, res) => {
     const id = req.params.idx
     Entry.findOne({ _id: id })
-        .populate({
-            path: 'reading',
-            model: 'Entry',
-            populate: {
-                path: 'firstCard',
-                model: 'Card',
-            },
-            populate: {
-                path: 'secondCard',
-                model: 'Card',
-            },
-            populate: {
-                path: 'thirdCard',
-                model: 'Card',
-            }
+    .populate({
+        path: 'readingId',
+        model: 'Reading',
+        populate: {
+            path: 'firstCard secondCard thirdCard',
+            model: 'Card'
+        }
         })
         .populate({
             path: 'creator',
@@ -116,19 +108,11 @@ exports.getEntryByDate = (req,res) => {
     nextDay.setDate(entryDate.getDate() +1)
     Entry.findOne({ date: {$lt: nextDay, $gte: entryDate}, creator: creator})
     .populate({
-        path: 'reading',
-        model: 'Entry',
+        path: 'readingId',
+        model: 'Reading',
         populate: {
-            path: 'firstCard',
-            model: 'Card',
-        },
-        populate: {
-            path: 'secondCard',
-            model: 'Card',
-        },
-        populate: {
-            path: 'thirdCard',
-            model: 'Card',
+            path: 'firstCard secondCard thirdCard',
+            model: 'Card'
         }
     })
     .populate({
