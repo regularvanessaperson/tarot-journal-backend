@@ -9,7 +9,7 @@ const Reading = mongoose.model(
         secondCard: {type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
         thirdCard:{type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
         fourthCard:{type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
-        fifthCard:{type: mongoose.Schema.Types.ObjectId, ref: 'Card'},
+        fifthCard:{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}
     })
 )
 
