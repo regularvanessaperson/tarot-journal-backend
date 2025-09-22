@@ -19,6 +19,12 @@ app.use(bodyParser.json())
 //parse request of content type = application / x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}))
 
+//ensure backend can serve static react files
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
 
 //SETUP MONGOOSE
 const db = require('./models/index')
