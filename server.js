@@ -63,26 +63,25 @@ app.listen(PORT, () => {
 })
 
 
-function initial(){
-    Role.estimatedDocumentCount((err, count)=>{
-        //if no roles are present, create our new roles( admin and user)
-        if (!err && count === 0){
-            new Role({
-                name: 'user'
-            }).save(err=>{
-                if(err) {
-                    console.log("error", err);
-        }
+async function initial() {
+  try {
+    const count = await Role.estimatedDocumentCount();
+    // if no roles are present, create our new roles (admin and user)
+    if (count === 0) {
+      try {
+        await new Role({ name: 'user' }).save();
         console.log("added 'user' to roles collection");
-      });
-      new Role({
-        name: "admin"
-      }).save(err => {
-        if (err) {
-          console.log("error", err);
-        }
+      } catch (err) {
+        console.log("error", err);
+      }
+      try {
+        await new Role({ name: 'admin' }).save();
         console.log("added 'admin' to roles collection");
-      });
+      } catch (err) {
+        console.log("error", err);
+      }
     }
-  });
+  } catch (err) {
+    console.log("error", err);
+  }
 }
