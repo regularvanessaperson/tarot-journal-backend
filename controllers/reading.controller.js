@@ -19,7 +19,7 @@ exports.generateReading = (req, res) => {
     //initialize empty array since axios call pulls 3 random cards per call
     const cards = []
 
-    axios.get("https://rws-cards-api.herokuapp.com/api/v1/cards/random?n=3").then((resp) => {
+    axios.get("https://tarotapi.dev/api/v1/cards/random?n=3").then((resp) => {
         // console.log(resp.data.cards)
         resp.data.cards.forEach(card => {
             //each card is pushed into the cards array as a new Card (need to make it so it saves in the Card collection once)
@@ -84,7 +84,7 @@ exports.generateFiveReading = (req, res) => {
     //initialize empty array since axios call pulls 3 random cards per call
     const cards = []
 
-    axios.get("https://rws-cards-api.herokuapp.com/api/v1/cards/random?n=5").then((resp) => {
+    axios.get("https://tarotapi.dev/api/v1/cards/random?n=5").then((resp) => {
         // console.log(resp.data.cards)
         resp.data.cards.forEach(card => {
             //each card is pushed into the cards array as a new Card (need to make it so it saves in the Card collection once)
